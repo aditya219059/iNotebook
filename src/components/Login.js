@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
-const Login = () => {
+const Login = (props) => {
     const [credentials, setCredentials] = useState({email: "", password: ""})
     let navigate = useNavigate();
 
@@ -19,10 +19,11 @@ const Login = () => {
         console.log(json);
         if(json.success) {
             localStorage.setItem('token', json.authtoken);
+            props.salert("Logged In", "success");
             navigate('/');
         }
         else {
-            alert("Invalid Credentials");
+            props.salert("Invalid credentials", "danger");
         }
     }
     const onChange = (e) => {
@@ -32,6 +33,7 @@ const Login = () => {
         <div>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
+                    <h2>Login to view your Notes</h2>
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input value={credentials.email} onChange={onChange} type="email" className="form-control" name="email" id="email" aria-describedby="emailHelp"/>
                         <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>

@@ -1,11 +1,11 @@
 
 import Notes from '../components/Notes'
 
-const Home = () => {
+const Home = (props) => {
   
   return (
     <div>
-      <Notes />
+      <Notes salert={props.salert} />
     </div>
   )
 }
